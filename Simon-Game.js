@@ -1,109 +1,98 @@
-let gameSeq = []
-let userSeq = []
+let gameSeq = [];
+let userSeq = [];
 
-let buttons = ["purple","navy","yellow","olive"]
+let buttons = ["purple", "navy", "yellow", "olive"];
 
-let start = false
-let level = 0
+let start = false;
+let level = 0;
 
-let h3 = document.querySelector("h3")
+let h3 = document.querySelector("h3");
 
-let highestScore = 0
+let highestScore = 0;
 
-function startGame() {
-    if(!start)
-    {
-        start = true
-        levelUp()
-    }
-}
+document.querySelector("#any").addEventListener("click", () => {
+  if (!start) {
+    start = true;
+    // document.querySelector("#any").classList.add("hidden");
+    // document.querySelector("boxes").classList.remove("hidden");
+    levelUp();
+  }
+});
 
-document.addEventListener("keypress", startGame);
-document.addEventListener("click", startGame);
-document.addEventListener("touchstart", startGame); 
 function levelUp() {
-    userSeq = []
-    level++
-    h3.innerText = `Level ${level}`
-    
-    let random_index = Math.floor(Math.random()*4)
-    let random_color = buttons[random_index]
-    let random_button = document.querySelector(`.${random_color}`)
-    gameSeq.push(random_color)
+  userSeq = [];
+  level++;
+  h3.innerText = `Level ${level}`;
 
-    flashButton(random_button)
-}
+  let random_index = Math.floor(Math.random() * 4);
+  let random_color = buttons[random_index];
+  let random_button = document.querySelector(`.${random_color}`);
+  gameSeq.push(random_color);
 
-function flashButton(random_button)
-{
-    random_button.classList.add("flash")
-    setTimeout(()=> {
-        random_button.classList.remove("flash");
-    },250)
-}
-function greenFlashButton(random_button)
-{
-    random_button.classList.add("greenFlash")
-    setTimeout(()=> {
-        random_button.classList.remove("greenFlash");
-    },250)
-}
-function redFlashButton(random_button)
-{
-    random_button.classList.add("redFlash")
-    setTimeout(()=> {
-        random_button.classList.remove("redFlash");
-    },250)
+  flashButton(random_button);
 }
 
+function flashButton(random_button) {
+  random_button.classList.add("flash");
+  setTimeout(() => {
+    random_button.classList.remove("flash");
+  }, 250);
+}
+function greenFlashButton(random_button) {
+  random_button.classList.add("greenFlash");
+  setTimeout(() => {
+    random_button.classList.remove("greenFlash");
+  }, 250);
+}
+function redFlashButton(random_button) {
+  random_button.classList.add("redFlash");
+  setTimeout(() => {
+    random_button.classList.remove("redFlash");
+  }, 250);
+}
 
 function check(indx) {
-    if(gameSeq[indx]=== userSeq[indx])
-    {
-        if(gameSeq.length === userSeq.length) setTimeout(levelUp,800)     
-    }
-    else
-    {
-        
-        if(level > highestScore) highestScore = level
+  if (gameSeq[indx] === userSeq[indx]) {
+    if (gameSeq.length === userSeq.length) setTimeout(levelUp, 800);
+  } else {
+    if (level > highestScore) highestScore = level;
 
-        h3.innerHTML = `Wrong Sequence. Your score is <b>${level}</b> <br>Press any key to retry <br> <br> Highest Score <b>${highestScore}</b>`;
+    h3.innerHTML = `Wrong Sequence. Your score is <b>${level}</b> <br>Press any key to retry <br> <br> Highest Score <b>${highestScore}</b>`;
 
-        document.querySelector("body").style.backgroundColor = "red"
-        setTimeout(()=> {
-            document.querySelector("body").style.backgroundColor = "white";
-        }, 250)
-        setTimeout(() => {
-          document.querySelector("body").style.backgroundColor = "red";
-        }, 500);
-        setTimeout(()=> {
-            document.querySelector("body").style.backgroundColor = "white";
-        }, 750)
-        reset()
-    }
+    // document.querySelector("#any").classList.remove("hidden");
+    // document.querySelector("boxes").classList.add("hidden");
+    // document.querySelector("body").style.backgroundColor = "red"
+    // setTimeout(()=> {
+    //     document.querySelector("body").style.backgroundColor = "white";
+    // }, 250)
+    // setTimeout(() => {
+    //   document.querySelector("body").style.backgroundColor = "red";
+    // }, 500);
+    // setTimeout(()=> {
+    //     document.querySelector("body").style.backgroundColor = "white";
+    // }, 750)
+    reset();
+  }
 }
 
 function buttonPress() {
-    let button = this
-    flashButton(button)
+  let button = this;
+  flashButton(button);
 
-    let userColor = button.getAttribute("id")
-    userSeq.push(userColor)
-    check(userSeq.length-1)
+  let userColor = button.getAttribute("id");
+  userSeq.push(userColor);
+  check(userSeq.length - 1);
 }
 
-let allButton = document.querySelectorAll(".btn")
+let allButton = document.querySelectorAll(".btn");
 
-for(button of allButton)
-{
-    button.addEventListener("click",buttonPress)
+for (button of allButton) {
+  button.addEventListener("click", buttonPress);
 }
 
 function reset() {
-    start = false
-    gameSeq = []
-    userSeq = []
-    level = 0
-
+  start = false;
+  gameSeq = [];
+  userSeq = [];
+  level = 0;
 }
-
