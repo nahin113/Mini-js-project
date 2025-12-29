@@ -10,13 +10,16 @@ let h3 = document.querySelector("h3")
 
 let highestScore = 0
 
-document.addEventListener("keypress",()=> {
+function startGame() {
     if(!start)
     {
         start = true
         levelUp()
     }
-})
+}
+
+document.addEventListener("keypress", startGame);
+document.addEventListener("click", startGame);
 
 function levelUp() {
     userSeq = []
@@ -101,4 +104,5 @@ function reset() {
     gameSeq = []
     userSeq = []
     level = 0
+
 }
