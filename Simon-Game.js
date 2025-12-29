@@ -20,7 +20,7 @@ function startGame() {
 
 document.addEventListener("keypress", startGame);
 document.addEventListener("click", startGame);
-
+document.addEventListener("touchstart", startGame); 
 function levelUp() {
     userSeq = []
     level++
@@ -106,3 +106,4 @@ function reset() {
     level = 0
 
 }
+
