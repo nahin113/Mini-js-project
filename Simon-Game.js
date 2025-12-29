@@ -13,9 +13,7 @@ let highestScore = 0;
 document.querySelector("#any").addEventListener("click", () => {
   if (!start) {
     start = true;
-    // document.querySelector("#any").classList.add("hidden");
-    // document.querySelector("boxes").classList.remove("hidden");
-    levelUp();
+    levelUp()
   }
 });
 
@@ -28,8 +26,9 @@ function levelUp() {
   let random_color = buttons[random_index];
   let random_button = document.querySelector(`.${random_color}`);
   gameSeq.push(random_color);
-
-  flashButton(random_button);
+  setTimeout(()=> {
+    flashButton(random_button);
+  },300)
 }
 
 function flashButton(random_button) {
@@ -59,18 +58,16 @@ function check(indx) {
 
     h3.innerHTML = `Wrong Sequence. Your score is <b>${level}</b> <br>Press any key to retry <br> <br> Highest Score <b>${highestScore}</b>`;
 
-    // document.querySelector("#any").classList.remove("hidden");
-    // document.querySelector("boxes").classList.add("hidden");
-    // document.querySelector("body").style.backgroundColor = "red"
-    // setTimeout(()=> {
-    //     document.querySelector("body").style.backgroundColor = "white";
-    // }, 250)
-    // setTimeout(() => {
-    //   document.querySelector("body").style.backgroundColor = "red";
-    // }, 500);
-    // setTimeout(()=> {
-    //     document.querySelector("body").style.backgroundColor = "white";
-    // }, 750)
+    document.querySelector("body").style.backgroundColor = "red"
+    setTimeout(()=> {
+        document.querySelector("body").style.backgroundColor = "white";
+    }, 250)
+    setTimeout(() => {
+      document.querySelector("body").style.backgroundColor = "red";
+    }, 500);
+    setTimeout(()=> {
+        document.querySelector("body").style.backgroundColor = "white";
+    }, 750)
     reset();
   }
 }
